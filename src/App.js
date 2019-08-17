@@ -90,7 +90,7 @@ render() {
                   <a href='#' 
                      className={(this.state.focusData === dataset.column_name ? "active" : "")}
                      onClick={() => this.updateStyle(dataset.map_name)}>
-                       {dataset.name}
+                       {dataset.map_name}
                   </a>
                 </li> )}
             </ul>
