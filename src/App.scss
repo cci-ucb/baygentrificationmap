@@ -79,28 +79,15 @@
 
         .legend-color {
             &.gradient-1 {
-                background-color: #FAEFDA;
                 border-radius: 5px 0 0 5px;
             }
-            &.gradient-2 {
-                background-color: #F4E0BB
-            }
-            &.gradient-3 {
-                background-color: #FCD07E;
-            }
-            &.gradient-4 {
-                background-color: #F4B030;
-            }
             &.gradient-5 {
-                background-color: #e49d1b;
                 border-radius: 0 5px 5px 0;
             }
             &.color-no {
-                background-color: #E2DDCF;
                 border-radius: 5px 0 0 5px;
             }
             &.color-yes {
-                background-color: #F9BB56;
                 border-radius: 0 5px 5px 0;
             }
         }

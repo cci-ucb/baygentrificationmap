@@ -13,19 +13,23 @@ const INITIAL_MAP_BOUNDS = L.latLngBounds(
   L.latLng(38.328730,-120.470581)
 );
 
-const getColorTotal = function(d) {
-  return d < 1 ? '#FAEFDA' :
-         d < 3 ? '#F4E0BB' :
-         d < 6 ? '#FCD07E' :
-         d < 10 ? '#F4B030' :
-         '#e49d1b';
-};
-
-const getColor = function(d) {
-  return !d || d.slice(0,2).toUpperCase() === 'NO' ? '#E2DDCF' : 
-  '#F9BB56';
+const getColorFunction = function(options) {
+  if (options.legend_style === "standard") {
+    return (d) => (
+      d < options.breaks[0] ? options.colors[0] :
+      d < options.breaks[1] ? options.colors[1] :
+      d < options.breaks[2] ? options.colors[2] :
+      d < options.breaks[3] ? options.colors[3] :
+      d >= options.breaks[3] ? options.colors[4] :
+      '#CCCCCC');
+  }
+  else if (options.legend_style === "classes") {
+    return (d) => (
+      d === options.breaks[0] ? options.colors[0] :
+      d === options.breaks[1] ? options.colors[1] :
+      '#CCCCCC');
+  }
 }
-
 
 class App extends React.Component {
 
@@ -36,32 +40,27 @@ constructor() {
     lng: -122.6,
     zoom: 9,
     mapData: demographicData,
-    focusData: 'rsk_pop',
+    focusData: 'gc_gent13',
   }
 }
-
-// updateStyle = (focusData) => {
-
-//   this.setState({
-//     focusData: focusfocusDataPolicy,
-//     style: function (geoJsonFeature) {
-//       return {
-//         fillColor: (focusPolicy === "total" ? getColorTotal(geoJsonFeature.properties.total) : getColor(geoJsonFeature.properties[focusPolicy])),
-//         weight: (geoJsonFeature.properties.city === focusCity ? 2 : 1),
-//         opacity: (geoJsonFeature.properties.city === focusCity ? 1 : 0.5),
-//         color: (geoJsonFeature.properties.city === focusCity ? "#000" : "#FFF"),
-//         fillOpacity: 0.9
-//       } ;
-//     }
-//   });
-
-// }
 
 render() {
   const position = [this.state.lat, this.state.lng];
   const focusOptions = mapOptions && mapOptions.find( (option) =>
     (option.column_name === this.state.focusData)
   );
+
+  const colorFunction = getColorFunction(focusOptions);
+
+  const mapStyle = function (geoJsonFeature) {
+      return {
+        fillColor: colorFunction(geoJsonFeature.properties[focusOptions.column_name]),
+        weight: 1,
+        opacity: 1,
+        color: "#FFF",
+        fillOpacity: 0.9
+      } ;
+    }
 
   return (
     <div>
@@ -77,7 +76,7 @@ render() {
         <GeoJSON 
           ref='data' 
           data={this.state.mapData} 
-          style={this.state.style} />
+          style={mapStyle} />
         <ZoomControl position='topleft' />
       </Map>
       <div className="overlay-container">
@@ -89,15 +88,15 @@ render() {
                 <li key={i}>
                   <a href='#' 
                      className={(this.state.focusData === dataset.column_name ? "active" : "")}
-                     onClick={() => this.updateStyle(dataset.map_name)}>
+                     onClick={() => this.setState({focusData: dataset.column_name})}>
                        {dataset.map_name}
                   </a>
                 </li> )}
             </ul>
           </div>
         </div>
-        {/* <Legend 
-          policy={(focusPolicyObject && focusPolicyObject.name ? focusPolicyObject.name : "Count of anti-displacement policies")} /> */}
+        <Legend 
+          options={focusOptions} />
       </div>
     </div>
     );
