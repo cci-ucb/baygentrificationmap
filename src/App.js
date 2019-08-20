@@ -42,16 +42,29 @@ constructor() {
     zoom: 9,
     mapData: demographicData,
     focusData: 'gc_gent13',
+    p: false
   }
 }
 
 componentDidUpdate(prevProps, prevState) {
   if (prevState.focusData !== this.state.focusData) {
     const data = this.refs.data.leafletElement;
-      data.eachLayer(function (layer) {
-        layer.unbindPopup();
-      });
-    console.log("did it");
+    const focusOptions = mapOptions && mapOptions.find( (option) =>
+      (option.column_name === this.state.focusData)
+    );
+
+    data.eachLayer(function (layer) {
+      var data = layer.feature.properties;
+      layer._popup.setContent(
+      `<p class="uk-text-muted">CENSUS TRACT</p>
+      <span>${data.tract}</span>
+      <p class="uk-text-muted">ASSOCIATED CITY</p>
+      <span>${data._city}</span>
+      <p class="uk-text-muted">COUNTY</p>
+      <span>${data._county}</span>
+      <p class="uk-text-muted uk-text-uppercase">${focusOptions.map_name}</p>
+      <span>${data[focusOptions.column_name]}</span>`);
+    });
   }
 }
 
