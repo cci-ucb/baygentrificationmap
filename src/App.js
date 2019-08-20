@@ -45,15 +45,21 @@ constructor() {
   }
 }
 
-
+componentDidUpdate(prevProps, prevState) {
+  if (prevState.focusData !== this.state.focusData) {
+    const data = this.refs.data.leafletElement;
+      data.eachLayer(function (layer) {
+        layer.unbindPopup();
+      });
+    console.log("did it");
+  }
+}
 
 render() {
   const position = [this.state.lat, this.state.lng];
   const focusOptions = mapOptions && mapOptions.find( (option) =>
     (option.column_name === this.state.focusData)
   );
-
-  console.log(focusOptions.map_name);
 
   const onEachFeature = function(feature,layer) { 
     layer.bindPopup(
@@ -67,9 +73,6 @@ render() {
       <span>${feature.properties[focusOptions.column_name]}</span>`
     );
   }
-
-
-
 
   const colorFunction = getColorFunction(focusOptions);
 
