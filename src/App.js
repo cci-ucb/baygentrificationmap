@@ -36,12 +36,17 @@ class App extends React.Component {
 constructor() {
   super()
   this.state = {
+    loaded: false,
     lat: 37.7,
     lng: -122.6,
     zoom: 9,
     mapData: demographicData,
     focusData: 'gc_gent13',
   }
+}
+
+onEachFeature(feature, layer) { 
+  layer.bindPopup('<h1>'+feature.properties.f1+'</h1><p>name: '+feature.properties.f2+'</p>');
 }
 
 render() {
@@ -63,6 +68,12 @@ render() {
     }
 
   return (
+    
+    !this.state.loaded ? 
+    <div className="uk-position-center">
+      <span uk-spinner="ratio: 2" />
+      <p>Loading...</p>
+    </div> :
     <div>
       <Map ref='map' center={position} zoom={this.state.zoom} zoomControl={false} scrollWheelZoom={true} className="map-container">
         <TileLayer 
