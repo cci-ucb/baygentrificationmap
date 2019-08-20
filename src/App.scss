@@ -15,7 +15,18 @@
 
 // CUSTOM STYLING
 
-.policy-selector, .city-selector {
+.leaflet-popup-content {
+     p {
+        font-size: 0.8rem;
+        margin-bottom: 0px;
+    }
+    span {
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+}
+
+.policy-selector{
     position: fixed;
 	color: #333;
     background-color: #FFF;
@@ -40,10 +51,6 @@
 
 .policy-selector {
     top: 10px;
-}
-
-.city-selector {
-	top: 60px;
 }
 
 .map-legend {
@@ -92,46 +99,5 @@
             }
         }
     
-    }
-}
-
-.inventory-box {
-    z-index: 1010;
-    min-width: 350px;
-    max-width: 400px;
-    max-height: 85%;
-    overflow-y: scroll;
-    position: absolute;
-    left: 20px;
-    top: 10px;
-    background-color: white;
-    border-radius: 5px;
-    box-shadow: 0 5px 15px rgba(0,0,0,.08);
-    
-    .inventory-list {
-        .inventory-list-item {
-            font-size: .8rem;
-            padding: 2px 0 2px 0;
-            margin: 0;
-
-            .highlighted-policy {
-                font-weight: 600;
-                color: #333;
-            }
-        }
-    }
-
-    .inventory-sources {
-        font-size: .8rem;
-        font-style: italic;
-        a {
-            color: #666;
-            text-decoration: underline;
-
-            &:hover {
-                text-decoration: none;
-            }
-        }
-        
     }
 }

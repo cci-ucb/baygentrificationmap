@@ -45,15 +45,31 @@ constructor() {
   }
 }
 
-onEachFeature(feature, layer) { 
-  layer.bindPopup('<h1>'+feature.properties.f1+'</h1><p>name: '+feature.properties.f2+'</p>');
-}
+
 
 render() {
   const position = [this.state.lat, this.state.lng];
   const focusOptions = mapOptions && mapOptions.find( (option) =>
     (option.column_name === this.state.focusData)
   );
+
+  console.log(focusOptions.map_name);
+
+  const onEachFeature = function(feature,layer) { 
+    layer.bindPopup(
+      `<p class="uk-text-muted">CENSUS TRACT</p>
+      <span>${feature.properties.tract}</span>
+      <p class="uk-text-muted">ASSOCIATED CITY</p>
+      <span>${feature.properties._city}</span>
+      <p class="uk-text-muted">COUNTY</p>
+      <span>${feature.properties._county}</span>
+      <p class="uk-text-muted uk-text-uppercase">${focusOptions.map_name}</p>
+      <span>${feature.properties[focusOptions.column_name]}</span>`
+    );
+  }
+
+
+
 
   const colorFunction = getColorFunction(focusOptions);
 
@@ -69,11 +85,11 @@ render() {
 
   return (
     
-    !this.state.loaded ? 
-    <div className="uk-position-center">
-      <span uk-spinner="ratio: 2" />
-      <p>Loading...</p>
-    </div> :
+    // !this.state.loaded ? 
+    // <div className="uk-position-center">
+    //   <span uk-spinner="ratio: 2" />
+    //   <p>Loading...</p>
+    // </div> :
     <div>
       <Map ref='map' center={position} zoom={this.state.zoom} zoomControl={false} scrollWheelZoom={true} className="map-container">
         <TileLayer 
@@ -87,7 +103,8 @@ render() {
         <GeoJSON 
           ref='data' 
           data={this.state.mapData} 
-          style={mapStyle} />
+          style={mapStyle} 
+          onEachFeature={onEachFeature} />
         <ZoomControl position='topleft' />
       </Map>
       <div className="overlay-container">
