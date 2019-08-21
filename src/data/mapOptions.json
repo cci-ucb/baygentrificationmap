@@ -394,7 +394,7 @@
    "layer_name": "cci_data_v06",
    "column_name": "gc_gent00",
    "legend_style": "classes",
-   "symbol": "",
+   "symbol": "word",
    "breaks": [0,1],
    "colors": ["#a6cee3","#0f3b82"],
    "classes": ["No","Yes"]
@@ -404,7 +404,7 @@
    "layer_name": "cci_data_v06",
    "column_name": "gc_gent13",
    "legend_style": "classes",
-   "symbol": "",
+   "symbol": "word",
    "breaks": [0,1],
    "colors": ["#a6cee3","#0f3b82"],
    "classes": ["No","Yes"]

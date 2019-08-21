@@ -4,7 +4,10 @@ import L from 'leaflet';
 
 import Legend from './components/Legend';
 import demographicData from './data/demographicData.json';
+import gentrificationData from './data/gentrificationData.json';
 import mapOptions from './data/mapOptions.json';
+
+import helpers from './utils/SymbologyFunctions';
 
 import './App.scss'
 
@@ -13,23 +16,7 @@ const INITIAL_MAP_BOUNDS = L.latLngBounds(
   L.latLng(38.328730,-120.470581)
 );
 
-const getColorFunction = function(options) {
-  if (options.legend_style === "standard") {
-    return (d) => (
-      d < options.breaks[0] ? options.colors[0] :
-      d < options.breaks[1] ? options.colors[1] :
-      d < options.breaks[2] ? options.colors[2] :
-      d < options.breaks[3] ? options.colors[3] :
-      d >= options.breaks[3] ? options.colors[4] :
-      '#CCCCCC');
-  }
-  else if (options.legend_style === "classes") {
-    return (d) => (
-      d === options.breaks[0] ? options.colors[0] :
-      d === options.breaks[1] ? options.colors[1] :
-      '#CCCCCC');
-  }
-}
+const GENT_LAYER_NAMES = ['udp_2015_1','bayarea_commercialtracts_comdist_c','status'];
 
 class App extends React.Component {
 
@@ -40,14 +27,15 @@ constructor() {
     lat: 37.7,
     lng: -122.6,
     zoom: 9,
-    mapData: demographicData,
-    focusData: 'gc_gent13',
-    p: false
+    mapData: gentrificationData,
+    focusData: 'gc_gent13'
   }
 }
 
 componentDidUpdate(prevProps, prevState) {
-  if (prevState.focusData !== this.state.focusData) {
+  
+  if (prevState.focusData !== this.state.focusData && this.state.focusData) {
+
     const data = this.refs.data.leafletElement;
     const focusOptions = mapOptions && mapOptions.find( (option) =>
       (option.column_name === this.state.focusData)
@@ -63,7 +51,7 @@ componentDidUpdate(prevProps, prevState) {
       <p class="uk-text-muted">COUNTY</p>
       <span>${data._county}</span>
       <p class="uk-text-muted uk-text-uppercase">${focusOptions.map_name}</p>
-      <span>${data[focusOptions.column_name]}</span>`);
+      <span>${helpers.symbolize(data[focusOptions.column_name],focusOptions.symbol)}</span>`);
     });
   }
 }
@@ -83,11 +71,11 @@ render() {
       <p class="uk-text-muted">COUNTY</p>
       <span>${feature.properties._county}</span>
       <p class="uk-text-muted uk-text-uppercase">${focusOptions.map_name}</p>
-      <span>${feature.properties[focusOptions.column_name]}</span>`
+      <span>${helpers.symbolize(feature.properties[focusOptions.column_name], focusOptions.symbol)}</span>`
     );
   }
 
-  const colorFunction = getColorFunction(focusOptions);
+  const colorFunction = helpers.getColorFunction(focusOptions);
 
   const mapStyle = function (geoJsonFeature) {
       return {
@@ -115,12 +103,13 @@ render() {
         <TileLayer 
           className="reference-layer"
           url="https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png" 
-          pane="shadowPane" />        
-        <GeoJSON 
-          ref='data' 
-          data={this.state.mapData} 
-          style={mapStyle} 
-          onEachFeature={onEachFeature} />
+          pane="shadowPane" />    
+        {focusOptions.map_name !== "Basemap only" &&   
+          <GeoJSON 
+            ref='data' 
+            data={this.state.mapData} 
+            style={mapStyle} 
+            onEachFeature={onEachFeature} /> }
         <ZoomControl position='topleft' />
       </Map>
       <div className="overlay-container">
