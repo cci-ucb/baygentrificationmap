@@ -3,7 +3,6 @@ import { Map, TileLayer, GeoJSON, ZoomControl} from 'react-leaflet';
 import L from 'leaflet';
 
 import Legend from '../components/Legend';
-import demographicData from '../data/demographicData.json';
 import mapOptions from '../data/mapOptions.json';
 
 import helpers from '../utils/SymbologyFunctions';
@@ -26,8 +25,21 @@ constructor() {
     lat: 37.7,
     lng: -122.6,
     zoom: 9,
-    mapData: demographicData
+    mapData: null
   }
+}
+
+/** Load map data from github */
+componentDidMount() {
+
+  fetch('https://raw.githubusercontent.com/cci-ucb/baygentrificationdata/master/demographicData.json')
+     .then((response) => response.json())
+     .then((responseJson) => {
+        this.setState({ mapData: responseJson });
+     })
+     .catch((error) => {
+        console.error(error);
+     });
 }
 
 componentDidUpdate(prevProps, prevState) {
@@ -87,11 +99,11 @@ render() {
 
   return (
     
-    // !this.state.loaded ? 
-    // <div className="uk-position-center">
-    //   <span uk-spinner="ratio: 2" />
-    //   <p>Loading...</p>
-    // </div> :
+    !this.state.mapData ? 
+    <div className="uk-position-center">
+      <span uk-spinner="ratio: 2" />
+      <p>Loading...</p>
+    </div> :
     <div>
       <Map ref='map' center={position} zoom={this.state.zoom} zoomControl={false} scrollWheelZoom={true} className="map-container">
         <TileLayer 
