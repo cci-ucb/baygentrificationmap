@@ -21,7 +21,6 @@ class DemographicMap extends React.Component {
 constructor() {
   super()
   this.state = {
-    loaded: false,
     lat: 37.7,
     lng: -122.6,
     zoom: 9,
