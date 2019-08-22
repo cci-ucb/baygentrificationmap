@@ -15,11 +15,9 @@ const Legend = (props) => {
                 <div className="legend-label">{props.options.breaks[3]}</div>
             </div>
             <div className="legend-items">
-                <div className="legend-color gradient-1" style={ { backgroundColor: props.options.colors[0] } } />
-                <div className="legend-color gradient-2" style={ { backgroundColor: props.options.colors[1] } } />
-                <div className="legend-color gradient-3" style={ { backgroundColor: props.options.colors[2] } } />
-                <div className="legend-color gradient-4" style={ { backgroundColor: props.options.colors[3] } } />
-                <div className="legend-color gradient-5" style={ { backgroundColor: props.options.colors[4] } } />
+                {[0,1,2,3,4].map( (i) => 
+                    (<div className={"legend-color gradient-" + (i + 1) + (props.options.colors[i].toUpperCase() === '#FFFFFF' ? " with-border":"")} style={ { backgroundColor: props.options.colors[i] } } key={i} />)
+                )}
             </div>
         </div> :
         props.options.legend_style === "classes" ?
