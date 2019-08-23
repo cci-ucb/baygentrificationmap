@@ -31,7 +31,37 @@ const Legend = (props) => {
                 <div className="legend-color large color-no" style={ { backgroundColor: props.options.colors[0] } } />
                 <div className="legend-color large color-yes" style={ { backgroundColor: props.options.colors[1] } } />
             </div>
-        </div> : <div/>
+        </div> : 
+        props.options.legend_style === "custom" && props.options.column_name === "udp_2015_1" ?
+        <div>
+            <h6>Lower income (LI) tracts</h6>
+                <div className="legend-dot" style={ { backgroundColor: '#d9d7e9' }} /> 
+                <span>Not Losing Low Income Households</span>
+                <br/>
+                <div className="legend-dot" style={ { backgroundColor: '#b7b5d6' }} />
+                <span>At Risk of Gentrification and/or Displacement</span>
+                <br/>
+                <div className="legend-dot" style={ { backgroundColor: '#9080ba' }} />
+                <span>Ongoing Gentrification and/or Displacement</span>
+            <h6>Moderate to high income (MHI) tracts</h6>
+                <div className="legend-dot" style={ { backgroundColor: '#F3D289' }} />
+                <span>Advanced Gentrification</span>
+                <br/>
+                <div className="legend-dot" style={ { backgroundColor: '#feedde' }} />
+                <span>Not Losing Low Income Households</span>
+                <br/>
+                <div className="legend-dot" style={ { backgroundColor: '#fdbe85' }} />
+                <span>At Risk of Exclusion</span>
+                <br/>
+                <div className="legend-dot" style={ { backgroundColor: '#fd8d3c' }} />
+                <span>Ongoing Exclusion</span>
+                <br/>
+                <div className="legend-dot" style={ { backgroundColor: '#d94701' }} />
+                <span>Advanced Exclusion</span>
+            <br/>
+        </div>       
+        :
+        <div/>
         }
     </div>);
 }

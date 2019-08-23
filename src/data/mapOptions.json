@@ -32,7 +32,7 @@
  {
    "map_name": "Commercial Gentrification",
    "layer_name": "udp2015_gentrification_merged",
-   "column_name": "status",
+   "column_name": "commercial_gent_status",
    "legend_style": "custom",
    "symbol": "",
    "breaks": "",
