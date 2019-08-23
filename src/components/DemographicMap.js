@@ -110,12 +110,13 @@ render() {
         <TileLayer 
           className="reference-layer"
           url="https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png" 
-          pane="shadowPane" />     
+          pane="shadowPane" />  
+          {this.props.focusData &&
           <GeoJSON 
             ref='data' 
             data={this.state.mapData} 
             style={mapStyle} 
-            onEachFeature={onEachFeature} /> 
+            onEachFeature={onEachFeature} /> }
         <ZoomControl position='topleft' />
       </Map>
         <Legend 
