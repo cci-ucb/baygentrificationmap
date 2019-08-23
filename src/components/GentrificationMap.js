@@ -68,9 +68,9 @@ render() {
   const onEachFeature = function(feature,layer) { 
     layer.bindPopup(
       `<p class="uk-text-muted">CENSUS TRACT</p>
-      <span>${data.tractce}</span>
+      <span>${feature.properties.tractce}</span>
       <p class="uk-text-muted uk-text-uppercase">${focusOptions.map_name}</p>
-      <span>${helpers.symbolize(data[focusOptions.column_name],focusOptions.symbol)}</span>`
+      <span>${helpers.symbolize(feature.properties[focusOptions.column_name],focusOptions.symbol)}</span>`
     );
   }
 

@@ -38,11 +38,11 @@ constructor() {
             </div>
           </div>
         </div>
-        {this.state.focusData && !GENT_LAYER_NAMES.includes(this.state.focusData) ? 
+        {!this.state.focusData || !GENT_LAYER_NAMES.includes(this.state.focusData) ? 
           <DemographicMap focusData={this.state.focusData} /> :
         this.state.focusData && GENT_LAYER_NAMES.includes(this.state.focusData) ?
           <GentrificationMap focusData={this.state.focusData} /> :
-        <div/>}
+        <div />}
       </div>);
   }
 }
