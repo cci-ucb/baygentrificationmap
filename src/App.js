@@ -6,7 +6,7 @@ import mapOptions from './data/mapOptions.json';
 
 import './App.scss'
 
-const GENT_LAYER_NAMES = ['udp_2015_1','bayarea_commercialtracts_comdist_c','status'];
+const GENT_LAYER_NAMES = ['udp_2015_1','bayarea_commercialtracts_comdist_c_','status'];
 
 class App extends React.Component {
 

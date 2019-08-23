@@ -1,6 +1,6 @@
 [
  {
-   "map_name": "Displacement typologies",
+   "map_name": "Displacement Typology",
    "layer_name": "udp2015_gentrification_merged",
    "column_name": "udp_2015_1",
    "legend_style": "custom",
@@ -22,11 +22,11 @@
  {
    "map_name": "Commercial Tracts",
    "layer_name": "udp2015_gentrification_merged",
-   "column_name": "bayarea_commercialtracts_comdist_c",
+   "column_name": "bayarea_commercialtracts_comdist_c_",
    "legend_style": "classes",
    "symbol": "word",
    "breaks": [0,1],
-   "colors": "",
+   "colors": ["#6ac2d8","#fb303e"],
    "classes": ["No","Yes"]
  },
  {
