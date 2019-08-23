@@ -23,11 +23,11 @@
    "map_name": "Commercial Tracts",
    "layer_name": "udp2015_gentrification_merged",
    "column_name": "bayarea_commercialtracts_comdist_c",
-   "legend_style": "custom",
-   "symbol": "",
-   "breaks": "",
+   "legend_style": "classes",
+   "symbol": "word",
+   "breaks": [0,1],
    "colors": "",
-   "classes": ""
+   "classes": ["No","Yes"]
  },
  {
    "map_name": "Commercial Gentrification",

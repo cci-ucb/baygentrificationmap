@@ -19,8 +19,12 @@ export default {
         else if (options.legend_style === "custom") {
             if (options.column_name === "udp_2015_1") {
                 return (d) => (
-                    d === options.breaks[0] ? options.colors[0] :
-                    d === options.breaks[1] ? options.colors[1] :
+                d === '' ? '' :
+                    '#CCCCCC');
+            }
+            else if (options.column_name === "status") {
+                return (d) => (
+                d === '' ? '' :
                     '#CCCCCC');
             }
         }
