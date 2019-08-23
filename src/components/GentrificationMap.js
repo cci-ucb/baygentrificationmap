@@ -2,7 +2,7 @@ import React from 'react';
 import { Map, TileLayer, GeoJSON, ZoomControl} from 'react-leaflet';
 import L from 'leaflet';
 
-import Legend from '../components/Legend';
+import Legend from './Legend';
 import mapOptions from '../data/mapOptions.json';
 
 import helpers from '../utils/SymbologyFunctions';
@@ -14,7 +14,7 @@ const INITIAL_MAP_BOUNDS = L.latLngBounds(
   L.latLng(38.328730,-120.470581)
 );
 
-class DemographicMap extends React.Component {
+class GentrificationMap extends React.Component {
 
 constructor() {
   super()
@@ -29,7 +29,7 @@ constructor() {
 /** Load map data from github */
 componentDidMount() {
 
-  fetch('https://raw.githubusercontent.com/cci-ucb/baygentrificationdata/master/demographicData.json')
+  fetch('https://raw.githubusercontent.com/cci-ucb/baygentrificationdata/master/gentrificationData.json')
      .then((response) => response.json())
      .then((responseJson) => {
         this.setState({ mapData: responseJson });
@@ -52,11 +52,7 @@ componentDidUpdate(prevProps, prevState) {
       var data = layer.feature.properties;
       layer._popup.setContent(
       `<p class="uk-text-muted">CENSUS TRACT</p>
-      <span>${data.tract}</span>
-      <p class="uk-text-muted">ASSOCIATED CITY</p>
-      <span>${data._city}</span>
-      <p class="uk-text-muted">COUNTY</p>
-      <span>${data._county}</span>
+      <span>${data.tractce}</span>
       <p class="uk-text-muted uk-text-uppercase">${focusOptions.map_name}</p>
       <span>${helpers.symbolize(data[focusOptions.column_name],focusOptions.symbol)}</span>`);
     });
@@ -72,13 +68,9 @@ render() {
   const onEachFeature = function(feature,layer) { 
     layer.bindPopup(
       `<p class="uk-text-muted">CENSUS TRACT</p>
-      <span>${feature.properties.tract}</span>
-      <p class="uk-text-muted">ASSOCIATED CITY</p>
-      <span>${feature.properties._city}</span>
-      <p class="uk-text-muted">COUNTY</p>
-      <span>${feature.properties._county}</span>
+      <span>${data.tractce}</span>
       <p class="uk-text-muted uk-text-uppercase">${focusOptions.map_name}</p>
-      <span>${helpers.symbolize(feature.properties[focusOptions.column_name], focusOptions.symbol)}</span>`
+      <span>${helpers.symbolize(data[focusOptions.column_name],focusOptions.symbol)}</span>`
     );
   }
 
@@ -127,4 +119,4 @@ render() {
   }
 }
 
-export default DemographicMap;
+export default GentrificationMap;

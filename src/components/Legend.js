@@ -8,15 +8,16 @@ const Legend = (props) => {
         {props.options.legend_style === "standard" ?
         <div>
             <div className="legend-items">
-                <div className="legend-label">{props.options.breaks[0]}</div>
+                <div className="legend-label">{"< " + props.options.breaks[0]}</div>
                 <div className="legend-label">&nbsp;</div>
                 <div className="legend-label">{(props.options.breaks[1] + props.options.breaks[2])/2}</div>
                 <div className="legend-label">&nbsp;</div>
-                <div className="legend-label">{props.options.breaks[3]}</div>
+                <div className="legend-label">{"> " + props.options.breaks[3]}</div>
             </div>
             <div className="legend-items">
                 {[0,1,2,3,4].map( (i) => 
-                    (<div className={"legend-color gradient-" + (i + 1) + (props.options.colors[i].toUpperCase() === '#FFFFFF' ? " with-border":"")} style={ { backgroundColor: props.options.colors[i] } } key={i} />)
+                    (<div className={"legend-color gradient-" + (i + 1) + (props.options.colors[i].toUpperCase() === '#FFFFFF' ? " with-border":"")} 
+                    style={ { backgroundColor: props.options.colors[i] } } key={i} />)
                 )}
             </div>
         </div> :

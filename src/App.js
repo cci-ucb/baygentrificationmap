@@ -1,5 +1,6 @@
 import React from 'react';
 import DemographicMap from './components/DemographicMap';
+import GentrificationMap from './components/GentrificationMap';
 
 import mapOptions from './data/mapOptions.json';
 
@@ -37,7 +38,11 @@ constructor() {
             </div>
           </div>
         </div>
-        <DemographicMap focusData={this.state.focusData} />
+        {this.state.focusData && !GENT_LAYER_NAMES.includes(this.state.focusData) ? 
+          <DemographicMap focusData={this.state.focusData} /> :
+        this.state.focusData && GENT_LAYER_NAMES.includes(this.state.focusData) ?
+          <GentrificationMap focusData={this.state.focusData} /> :
+        <div/>}
       </div>);
   }
 }
