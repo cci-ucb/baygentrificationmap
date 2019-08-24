@@ -42,11 +42,13 @@ export default {
             return (d) => ('#CCCCCC');
         }
     },
-    
-    symbolize(value, symbol) {
-        return (symbol === '$' ? '$' + value : 
-        symbol === 'word' ? (value === 1 ? 'Yes' : value === 0 ? 'No' : 'Unknown'):
-        value + symbol)
-    }
 
+    symbolize(value, symbol) {
+        const numberWithCommas = (x) => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+        return (symbol === '$' ? '$' + numberWithCommas(value) : 
+        symbol === 'word' ? (value === 1 ? 'Yes' : value === 0 ? 'No' : 'Unknown'):
+        numberWithCommas(value) + symbol)
+    }
+    
 }

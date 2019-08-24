@@ -1,4 +1,5 @@
 import React from 'react';
+import helpers from '../utils/SymbologyFunctions';
 
 const Legend = (props) => {
 
@@ -8,11 +9,11 @@ const Legend = (props) => {
         {props.options.legend_style === "standard" ?
         <div>
             <div className="legend-items">
-                <div className="legend-label">{"< " + props.options.breaks[0]}</div>
+                <div className="legend-label">{helpers.symbolize(props.options.breaks[0], props.options.symbol)}</div>
                 <div className="legend-label">&nbsp;</div>
-                <div className="legend-label">{(props.options.breaks[1] + props.options.breaks[2])/2}</div>
+                <div className="legend-label">{helpers.symbolize((props.options.breaks[1] + props.options.breaks[2])/2, props.options.symbol)}</div>
                 <div className="legend-label">&nbsp;</div>
-                <div className="legend-label">{"> " + props.options.breaks[3]}</div>
+                <div className="legend-label">{helpers.symbolize(props.options.breaks[3], props.options.symbol)}</div>
             </div>
             <div className="legend-items">
                 {[0,1,2,3,4].map( (i) => 
