@@ -54,7 +54,7 @@ componentDidUpdate(prevProps, prevState) {
       `<p class="uk-text-muted">CENSUS TRACT</p>
       <span>${data.tractce}</span>
       <p class="uk-text-muted uk-text-uppercase">${focusOptions.map_name}</p>
-      <span>${helpers.symbolize(data[focusOptions.column_name],focusOptions.symbol)}</span>`);
+      <span>${(!data[focusOptions.column_name] ? 'N/A' : helpers.symbolize(data[focusOptions.column_name],focusOptions.symbol))}</span>`);
     });
   }
 }
@@ -70,7 +70,7 @@ render() {
       `<p class="uk-text-muted">CENSUS TRACT</p>
       <span>${feature.properties.tractce}</span>
       <p class="uk-text-muted uk-text-uppercase">${focusOptions.map_name}</p>
-      <span>${helpers.symbolize(feature.properties[focusOptions.column_name],focusOptions.symbol)}</span>`
+      <span>${(!feature.properties[focusOptions.column_name] ? 'N/A' : helpers.symbolize(feature.properties[focusOptions.column_name],focusOptions.symbol))}</span>`
     );
   }
 

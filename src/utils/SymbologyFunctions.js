@@ -31,8 +31,11 @@ export default {
             }
             else if (options.column_name === "commercial_gent_status") {
                 return (d) => (
-                d === '' ? '' :
-                    '#CCCCCC');
+                d === 'Did not gentrify' ? '#d7d7d7' :
+                d === 'Gentrified 1990-2000' ? '#a6cee3' :
+                d === 'Gentrified 2000-2013' ? '#1f78b4' :
+                d === 'Gentrified both periods' ? '#33a02c' :
+                    '#CCCCCC00');
             }
         }
         else {

@@ -59,8 +59,21 @@ const Legend = (props) => {
                 <div className="legend-dot" style={ { backgroundColor: '#d94701' }} />
                 <span>Advanced Exclusion</span>
             <br/>
-        </div>       
-        :
+        </div> :
+         props.options.legend_style === "custom" && props.options.column_name === "commercial_gent_status" ?
+         <div>
+            <div className="legend-dot" style={ { backgroundColor: '#d7d7d7' }} /> 
+            <span>Did not gentrify</span>
+            <br/>
+            <div className="legend-dot" style={ { backgroundColor: '#a6cee3' }} />
+            <span>Gentrified 1990-2000</span>
+            <br/>
+            <div className="legend-dot" style={ { backgroundColor: '#1f78b4' }} />
+            <span>Gentrified 2000-2013</span>
+            <br/>
+            <div className="legend-dot" style={ { backgroundColor: '#33a02c' }} />
+            <span>Gentrified both periods</span>
+        </div> :
         <div/>
         }
     </div>);
