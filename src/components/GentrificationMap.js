@@ -108,8 +108,6 @@ render() {
   }
 
   const colorFunction = helpers.getColorFunction(focusOptions);
-  console.log(colorFunction);
-  console.log(focusOptions.column_name);
 
   const mapStyle = function (geoJsonFeature) {
       return {
