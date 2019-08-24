@@ -12,13 +12,41 @@ class App extends React.Component {
 constructor() {
     super()
     this.state = {
-      focusData: 'udp_2015_1'
+      focusData: 'udp_2015_1',
+      gentrificationData: null,
+      demographicData: null
     }
+  }
+
+    /** Load map data from github */
+  componentDidMount() {
+
+    fetch('https://raw.githubusercontent.com/cci-ucb/baygentrificationdata/master/gentrificationData.json')
+      .then((response) => response.json())
+      .then((responseJson) => {
+          this.setState({ gentrificationData: responseJson });
+          fetch('https://raw.githubusercontent.com/cci-ucb/baygentrificationdata/master/demographicData.json')
+            .then((response) => response.json())
+            .then((responseJson) => {
+                this.setState({ demographicData: responseJson });
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+      })
+      .catch((error) => {
+          console.error(error);
+      });
   }
 
   render() {
 
     return (
+      !this.state.gentrificationData || !this.state.demographicData ? 
+      <div className="uk-position-center">
+        <span uk-spinner="ratio: 2" />
+        <p>Loading...</p>
+      </div> :
       <div>
         <div className="overlay-container">
           <button className="uk-button uk-button-default policy-selector" type="button">Map a data series... </button>
@@ -37,7 +65,10 @@ constructor() {
             </div>
           </div>
         </div>
-          <LeafletMap focusData={this.state.focusData} 
+          <LeafletMap 
+            gentrificationData={this.state.gentrificationData}
+            demographicData={this.state.demographicData}
+            focusData={this.state.focusData} 
             focusDataType={(GENT_LAYER_NAMES.includes(this.state.focusData)) ? "gentrification" : "demographic"} />
       </div>);
   }

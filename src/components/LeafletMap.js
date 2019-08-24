@@ -1,6 +1,5 @@
 import React from 'react';
 import { Map, TileLayer, GeoJSON, ZoomControl} from 'react-leaflet';
-import L from 'leaflet';
 
 import Legend from './Legend';
 import mapOptions from '../data/mapOptions.json';
@@ -15,32 +14,9 @@ constructor() {
   super()
   this.state = {
     lat: 37.7,
-    lng: -122.6,
-    zoom: 9,
-    demographicData: null,
-    gentrificationData: null
+    lng: -122,
+    zoom: 10
   }
-}
-
-/** Load map data from github */
-componentDidMount() {
-
-  fetch('https://raw.githubusercontent.com/cci-ucb/baygentrificationdata/master/gentrificationData.json')
-     .then((response) => response.json())
-     .then((responseJson) => {
-        this.setState({ gentrificationData: responseJson });
-        fetch('https://raw.githubusercontent.com/cci-ucb/baygentrificationdata/master/demographicData.json')
-          .then((response) => response.json())
-          .then((responseJson) => {
-              this.setState({ demographicData: responseJson });
-          })
-          .catch((error) => {
-              console.error(error);
-          });
-     })
-     .catch((error) => {
-        console.error(error);
-     });
 }
 
 componentDidUpdate(prevProps, prevState) {
@@ -114,12 +90,6 @@ render() {
     }
 
   return (
-    
-    !this.state.gentrificationData || !this.state.demographicData ? 
-    <div className="uk-position-center">
-      <span uk-spinner="ratio: 2" />
-      <p>Loading...</p>
-    </div> :
     <div>
       <Map ref='map' center={position} zoom={this.state.zoom} 
         minZoom={8} maxZoom={14} zoomControl={false} scrollWheelZoom={true} 
@@ -134,11 +104,11 @@ render() {
           (this.props.focusDataType === "gentrification" ?  
             <GeoJSON 
               ref='data' key='gentrification'
-              data={this.state.gentrificationData} 
+              data={this.props.gentrificationData} 
               style={mapStyle} onEachFeature={onEachFeature} /> :
             <GeoJSON 
               ref='data' key='demographic'
-              data={this.state.demographicData} 
+              data={this.props.demographicData} 
               style={mapStyle} onEachFeature={onEachFeature} />) }
         <ZoomControl position='topright' />
       </Map>
