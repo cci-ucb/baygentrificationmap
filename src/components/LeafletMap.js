@@ -14,8 +14,7 @@ const INITIAL_MAP_BOUNDS = L.latLngBounds(
   L.latLng(38.328730,-120.470581)
 );
 
-
-class GentrificationMap extends React.Component {
+class LeafletMap extends React.Component {
 
 constructor() {
   super()
@@ -138,18 +137,18 @@ render() {
           pane="shadowPane" />  
           {this.props.focusData && 
           (this.props.focusDataType === "gentrification" ?  
-          <GeoJSON 
-          ref='data' 
-          key='gentrification'
-          data={this.state.gentrificationData} 
-          style={mapStyle} 
-          onEachFeature={onEachFeature} /> :
-          <GeoJSON 
-            ref='data' 
-            key='demographic'
-            data={this.state.demographicData} 
-            style={mapStyle} 
-          onEachFeature={onEachFeature} />) }
+            <GeoJSON 
+              ref='data' 
+              key='gentrification'
+              data={this.state.gentrificationData} 
+              style={mapStyle} 
+              onEachFeature={onEachFeature} /> :
+            <GeoJSON 
+              ref='data' 
+              key='demographic'
+              data={this.state.demographicData} 
+              style={mapStyle} 
+              onEachFeature={onEachFeature} />) }
         <ZoomControl position='topright' />
       </Map>
         <Legend 
@@ -161,4 +160,4 @@ render() {
   }
 }
 
-export default GentrificationMap;
+export default LeafletMap;
