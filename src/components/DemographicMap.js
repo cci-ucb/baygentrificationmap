@@ -117,7 +117,7 @@ render() {
             data={this.state.mapData} 
             style={mapStyle} 
             onEachFeature={onEachFeature} /> }
-        <ZoomControl position='topleft' />
+        <ZoomControl position='topright' />
       </Map>
         <Legend 
           options={focusOptions} />
