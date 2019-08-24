@@ -9,11 +9,6 @@ import helpers from '../utils/SymbologyFunctions';
 
 import '../App.scss'
 
-const INITIAL_MAP_BOUNDS = L.latLngBounds(
-  L.latLng(36.923548,-123.895569),
-  L.latLng(38.328730,-120.470581)
-);
-
 class LeafletMap extends React.Component {
 
 constructor() {
@@ -126,29 +121,25 @@ render() {
       <p>Loading...</p>
     </div> :
     <div>
-      <Map ref='map' center={position} zoom={this.state.zoom} zoomControl={false} scrollWheelZoom={true} className="map-container">
+      <Map ref='map' center={position} zoom={this.state.zoom} 
+        minZoom={8} maxZoom={14} zoomControl={false} scrollWheelZoom={true} 
+        className="map-container">
         <TileLayer 
-          className="basemap-layer"
-          url="https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png" 
+          className="basemap-layer" url="https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png" 
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>' />
         <TileLayer 
-          className="reference-layer"
-          url="https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png" 
+          className="reference-layer" url="https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png" 
           pane="shadowPane" />  
           {this.props.focusData && 
           (this.props.focusDataType === "gentrification" ?  
             <GeoJSON 
-              ref='data' 
-              key='gentrification'
+              ref='data' key='gentrification'
               data={this.state.gentrificationData} 
-              style={mapStyle} 
-              onEachFeature={onEachFeature} /> :
+              style={mapStyle} onEachFeature={onEachFeature} /> :
             <GeoJSON 
-              ref='data' 
-              key='demographic'
+              ref='data' key='demographic'
               data={this.state.demographicData} 
-              style={mapStyle} 
-              onEachFeature={onEachFeature} />) }
+              style={mapStyle} onEachFeature={onEachFeature} />) }
         <ZoomControl position='topright' />
       </Map>
         <Legend 
