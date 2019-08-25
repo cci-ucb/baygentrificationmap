@@ -46,7 +46,7 @@ componentDidUpdate(prevProps, prevState) {
       <span>${data._county}</span>`) + 
 
       `<p class="uk-text-muted uk-text-uppercase">${focusOptions.map_name}</p>
-      <span>${(!data[focusOptions.column_name] ? 'N/A' : helpers.symbolize(data[focusOptions.column_name],focusOptions.symbol))}</span>`);
+      <span>${(data[focusOptions.column_name] === null ? 'N/A' : helpers.symbolize(data[focusOptions.column_name],focusOptions.symbol))}</span>`);
     });
   }
 }
@@ -73,7 +73,7 @@ render() {
       <p class="uk-text-muted">COUNTY</p>
       <span>${feature.properties._county}</span>`) +
       `<p class="uk-text-muted uk-text-uppercase">${focusOptions.map_name}</p>
-      <span>${(!feature.properties[focusOptions.column_name] ? 'N/A' : helpers.symbolize(feature.properties[focusOptions.column_name],focusOptions.symbol))}</span>`
+      <span>${(feature.properties[focusOptions.column_name] === null ? 'N/A' : helpers.symbolize(feature.properties[focusOptions.column_name],focusOptions.symbol))}</span>`
     );
   }
 

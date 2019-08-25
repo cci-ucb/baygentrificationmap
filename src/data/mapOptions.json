@@ -4,7 +4,7 @@
    "layer_name": "udp2015_gentrification_merged",
    "column_name": "udp_2015_1",
    "legend_style": "custom",
-   "symbol": "",
+   "symbol": "text",
    "breaks": "",
    "colors": "",
    "classes": ""
@@ -34,7 +34,7 @@
    "layer_name": "udp2015_gentrification_merged",
    "column_name": "commercial_gent_status",
    "legend_style": "custom",
-   "symbol": "",
+   "symbol": "text",
    "breaks": "",
    "colors": "",
    "classes": ""

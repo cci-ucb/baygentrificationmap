@@ -48,6 +48,7 @@ export default {
 
         return (symbol === '$' ? '$' + numberWithCommas(value) : 
         symbol === 'word' ? (value === 1 ? 'Yes' : value === 0 ? 'No' : 'Unknown'):
+        symbol === 'text' ? value :
         numberWithCommas(value) + symbol)
     }
     
