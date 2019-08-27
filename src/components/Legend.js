@@ -45,7 +45,7 @@ const Legend = (props) => {
                 <div className="legend-dot" style={ { backgroundColor: '#9080ba' }} />
                 <span>Ongoing Gentrification and/or Displacement</span>
             <h6>Moderate to high income (MHI) tracts</h6>
-                <div className="legend-dot" style={ { backgroundColor: '#F3D289' }} />
+                <div className="legend-dot" style={ { backgroundColor: '#FFDB74' }} />
                 <span>Advanced Gentrification</span>
                 <br/>
                 <div className="legend-dot" style={ { backgroundColor: '#feedde' }} />

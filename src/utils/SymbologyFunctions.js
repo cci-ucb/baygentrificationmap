@@ -22,7 +22,7 @@ export default {
                 d === 'LI - Not Losing Low Income Households or Very Early Stages of Gentrification/Displacement' ? '#d9d7e9' :
                 d === 'LI - At Risk of Gentrification and/or Displacement' ? '#b7b5d6' :
                 d === 'LI - Ongoing Gentrification and/or Displacement' ? '#9080ba' :
-                d === 'MHI - Advanced Gentrification' ? '#F3D289' :
+                d === 'MHI - Advanced Gentrification' ? '#FFDB74' :
                 d === 'MHI - Not Losing Low Income Households or Very Early Stages of Displacement' ? '#feedde' :
                 d === 'MHI - At Risk of Exclusion' ? '#fdbe85' :
                 d === 'MHI - Ongoing Exclusion' ? '#fd8d3c' :
