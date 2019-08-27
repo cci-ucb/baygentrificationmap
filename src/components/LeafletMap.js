@@ -83,7 +83,7 @@ render() {
       return {
         fillColor: colorFunction(geoJsonFeature.properties[focusOptions.column_name]),
         weight: 1,
-        opacity: 1,
+        opacity: 0.65,
         color: "#FFF",
         fillOpacity: 0.9
       } ;
