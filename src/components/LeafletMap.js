@@ -95,7 +95,7 @@ render() {
         minZoom={8} maxZoom={14} zoomControl={false} scrollWheelZoom={true} 
         className="map-container">
         <TileLayer 
-          className="basemap-layer" url="https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png" 
+          className="basemap-layer" url="http://basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png" 
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>' />
         <TileLayer 
           className="reference-layer" url="https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png" 
